@@ -1,14 +1,17 @@
 {
   "name": "kanban_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A demo for suivivejs/webpack_react",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "robertlyc",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "^1.12.9"
+    "html-webpack-plugin": "^1.7.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
   }
 }
