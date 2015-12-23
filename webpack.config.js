@@ -17,11 +17,19 @@ var common = {
   //   path: PATHS.build,
   //   filename: 'bundle.js'
   // },
+  resolve: {
+    extentsions: ['', '.js', '.jsx']
+  }, 
   module: {
     loaders: [
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
+        include: PATHS.app
+      },
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel'],
         include: PATHS.app
       }
     ]
