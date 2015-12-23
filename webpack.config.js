@@ -18,8 +18,8 @@ var common = {
   //   filename: 'bundle.js'
   // },
   resolve: {
-    extentsions: ['', '.js', '.jsx']
-  }, 
+    extensions: ['', '.js', '.jsx']
+  },
   module: {
     loaders: [
       {

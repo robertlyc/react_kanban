@@ -1,6 +1,6 @@
 import React from 'react';
-improt Note from './Note.jsx';
+import Note from './Note.jsx';
 
-exprot default () => {
-  return <Note />
+export default () => {
+  return <Note />;
 };
