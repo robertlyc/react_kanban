@@ -29,10 +29,11 @@ export default class App extends React.Component {
     return (
       <div>
       <button className="add-note" onClick={this.addNote}>+</button>
-        <Note items={notes} />
+        <Note items={notes} onEdit={this.editNote} />
       </div>
     );
   }
+  
   addNote = () => {
     this.setState({
       notes: this.state.notes.concat([{
@@ -40,5 +41,16 @@ export default class App extends React.Component {
         task: 'New task'
       }]) 
     });
+  }
+  
+  editNote = (id, task) => {
+    const notes = this.state.notes.map((note) => {
+      if (note.id === id) {
+        note.task = task;
+      }
+      return note;
+    });
+
+    this.setState({notes});
   }
 }

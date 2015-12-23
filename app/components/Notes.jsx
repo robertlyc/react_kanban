@@ -6,14 +6,16 @@ export default class Notes extends React.Component {
     const notes = this.props.items;
     
     return (
-      <ul className="notes">{notes.map(this.renderNote)}</ul>
+      <ul className="notes">{notes.map(this.renderNote, this)}</ul>
     );
   }
   
   renderNote(note) {
     return (
-      <li key={note.id}>
-        <Note task={note.task} />
+      <li className="note" key={note.id}>
+        <Note 
+          task={note.task}
+          onEdit={this.props.onEdit.bind(null, note.id)} />
       </li>
     );
   }
