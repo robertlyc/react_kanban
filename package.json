@@ -10,6 +10,8 @@
   "author": "robertlyc",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.3.21",
+    "babel-loader": "^6.2.0",
     "html-webpack-plugin": "^1.7.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
