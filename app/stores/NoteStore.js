@@ -10,7 +10,7 @@ class NoteStore {
   }
   
   create(note) {
-    cost notes = this.notes;
+    const notes = this.notes;
     note.id = uuid.v4();
     
     this.setState({
