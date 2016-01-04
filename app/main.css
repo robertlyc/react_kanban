@@ -43,6 +43,11 @@ body {
   cursor: pointer;
   visibility: hidden;
 }
+
 .note:hover .delete {
   visibility: visible;
+}
+
+.note .value {
+  display: inline-block;
 }

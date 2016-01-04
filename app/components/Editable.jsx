@@ -36,4 +36,15 @@ export default class Editable extends React.Component {
     );
   }
   
+  checkEnter = (e) => {
+    if (e.key === 'Enter') {
+      this.finishEdit(e);
+    }
+  }
+  
+  finishEdit = (e) => {
+    if (this.props.onEdit) {
+      this.props.onEdit(e.target.value);
+    }
+  }
 }
