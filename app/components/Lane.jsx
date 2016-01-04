@@ -54,7 +54,7 @@ export default class Lane extends React.Component {
     LaneActions.attachToLane({laneId});
   }
   editNote(id, task) {
-    NoteActions.update({id, task});
+    NoteActions.update({id, task, editing: false});
   }
   deleteNote(laneId, noteId) {
     LaneActions.detachFromLane({laneId, noteId});
@@ -62,14 +62,18 @@ export default class Lane extends React.Component {
   }
   
   editName(id, name) {
-    console.log('editing lane name', id, name);
+    if(name) {
+      LaneActions.update({id, name, editing: false})
+    } else {
+      LaneActions.delete(id);
+    }
   }
   
   activateLaneEdit(id) {
-    console.log('edit lan name', id);
+    LaneActions.update({id, editing: true});
   }
   
   activateNoteEdit(id) {
-    console.log('edit note task', id);
+    NoteActions.update({id, editing: true})
   }
 }

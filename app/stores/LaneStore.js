@@ -20,6 +20,22 @@ class LaneStore {
     });
   }
   
+  update(updateLane) {
+    const lanes = this.lanes.map((lane) => {
+      if (lane.id === updateLane.id) {
+        lane = assign({}, lane, updateLane);
+      }
+      
+      return lane;
+    });
+  }
+  
+  delete(id) {
+    this.setState({
+      lanes: this.lanes.filter((lane) => lane.id !== id)
+    });
+  }
+  
   attachToLane({laneId, noteId}) {
     if(!noteId) {
       this.waitFor(NoteStore);
