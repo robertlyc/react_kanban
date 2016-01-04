@@ -14,6 +14,8 @@ export default class Lane extends React.Component {
     
     this.addNote = this.addNote.bind(this, id);
     this.deleteNote = this.deleteNote.bind(this, id);
+    // this.editName = this.editName.bind(this, id);
+    // this.activateLaneEdit = this.activateLaneEdit.bind(this, id);
   }
   
   render() {
