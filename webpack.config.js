@@ -13,14 +13,12 @@ process.env.BABEL_ENV = TARGET;
 
 var common = {
   entry: PATHS.app,
-  //Given webpack-dev-server runs in-memory, we can drop output.
-  //We'll look into it again once we get to the build chapter.
-  // output: {
-  //   path: PATHS.build,
-  //   filename: 'bundle.js'
-  // },
   resolve: {
     extensions: ['', '.js', '.jsx']
+  },
+  outupt: {
+    path: PATHS.build,
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
@@ -37,9 +35,10 @@ var common = {
     ]
   },
   plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
     new HtmlwebpackPlugin({
-      titel: 'Kanban app'
+      template: 'node_modules/html-webpack-template/index.html',
+      titel: 'Kanban app',
+      appMountId: 'app'
     })
   ]
 };
@@ -62,4 +61,8 @@ if (TARGET === 'start' || !TARGET) {
       new webpack.HotModuleReplacementPlugin()
     ]
   });
+}
+
+if (TARGET === 'build') {
+  module.exports = merge(common, {});
 }

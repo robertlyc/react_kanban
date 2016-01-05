@@ -21,14 +21,16 @@ class LaneStore {
     });
   }
   
-  update(updateLane) {
+  update(updatedLane) {
     const lanes = this.lanes.map((lane) => {
       if (lane.id === updateLane.id) {
-        lane = assign({}, lane, updateLane);
+        lane = assign({}, lane, updatedLane);
       }
       
       return lane;
     });
+    
+    this.setState({lanes});
   }
   
   delete(id) {
@@ -37,13 +39,7 @@ class LaneStore {
     });
   }
   
-  attachToLane({laneId, noteId}) {
-    if(!noteId) {
-      this.waitFor(NoteStore);
-      
-      noteId = NoteStore.getState().notes.slice(-1)[0].id;
-    }
-    
+  attachToLane({laneId, noteId}) {  
     const lanes = this.lanes.map((lane) => {
       if (lane.id === laneId) {
         if (lane.notes.indexOf(noteId) === -1) {
@@ -68,7 +64,7 @@ class LaneStore {
       return lane;
     });
     
-    this.setState({lantes});
+    this.setState({lanes});
   }
 }
 
