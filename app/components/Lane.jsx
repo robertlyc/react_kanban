@@ -42,7 +42,7 @@ export default class Lane extends React.Component {
           }}
         >
           <Notes 
-            onValueClick={this.activateLaneEdit}
+            onValueClick={this.activateNoteEdit}
             onEdit={this.editNote}
             onDelete={this.deleteNote} />
         </AltContainer>
