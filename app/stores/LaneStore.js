@@ -40,7 +40,9 @@ class LaneStore {
     });
   }
   
-  attachToLane({laneId, noteId}) {  
+  attachToLane({laneId, noteId}) {
+    this.removeNote(noteId);
+      
     const lanes = this.lanes.map((lane) => {
       if (lane.id === laneId) {
         if (lane.notes.indexOf(noteId) === -1) {
@@ -54,6 +56,21 @@ class LaneStore {
     });
     
     this.setState({lanes});
+  }
+  
+  removeNote(noteId) {
+    const lanes = this.lanes;
+    const removeLane = lanes.filter((lane) => {
+      return lane.notes.indexOf(noteId) >= 0;
+    })[0];
+    
+    if(!removeLane) {
+      return;
+    }
+    
+    const removeNoteIndex = removeLane.notes.indexOf(noteId);
+    
+    removeLane.notes = removeLane.notes.slice(0, removeNoteIndex).concat(removeLane.notes.slice(removeNoteIndex + 1));
   }
   
   detachFromLane({laneId, noteId}) {
