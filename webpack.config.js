@@ -16,7 +16,7 @@ var common = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  outupt: {
+  output: {
     path: PATHS.build,
     filename: 'bundle.js'
   },
@@ -64,5 +64,13 @@ if (TARGET === 'start' || !TARGET) {
 }
 
 if (TARGET === 'build') {
-  module.exports = merge(common, {});
+  module.exports = merge(common, {
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      })
+    ]
+  });
 }
