@@ -4,6 +4,8 @@ var HtmlwebpackPlugin = require('html-webpack-plugin');
 var merge = require('webpack-merge');
 var pkg = require('./package.json');
 var Clean = require('clean-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -24,11 +26,6 @@ var common = {
   },
   module: {
     loaders: [
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-        include: PATHS.app
-      },
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
@@ -59,6 +56,15 @@ if (TARGET === 'start' || !TARGET) {
       host: process.env.HOST,
       port: process.env.PORT
     },
+    module: {
+      loaders: [
+        {
+          test: /\.css$/,
+          loaders: ['style', 'css'],
+          include: PATHS.app
+        }
+      ]
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin()
     ]
@@ -78,8 +84,18 @@ if (TARGET === 'build') {
       filename: '[name].[chunkhash].js',
       chunkFilename: '[chunkhash].js'
     },
+    module: {
+      loaders: [
+        {
+          test: /\.css$/,
+          loaders: ExtractTextPlugin.extract('style', 'css'),
+          include: PATHS.app
+        }
+      ]
+    },
     plugins: [
-      new Clean([PATHS.build]),
+      new Clean([build]),
+      new ExtractTextPlugin('styles.[chnkhash].css'),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
