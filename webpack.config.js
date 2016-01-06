@@ -3,6 +3,8 @@ var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 var merge = require('webpack-merge');
 
+var pkg = require('./package.json');
+
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -18,7 +20,7 @@ var common = {
   },
   output: {
     path: PATHS.build,
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
@@ -65,11 +67,19 @@ if (TARGET === 'start' || !TARGET) {
 
 if (TARGET === 'build') {
   module.exports = merge(common, {
+    entry: {
+      app: PATHS.app,
+      vendor: Object.keys(pkg.dependencies).filter(function(v){
+        return v !== 'alt-utils';
+      })
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
-      
+      new webpack.optimize.CommonsChunkPlugin({
+        name: ['vendor', 'mainfest']
+      }),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
