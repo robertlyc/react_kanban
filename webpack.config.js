@@ -88,14 +88,14 @@ if (TARGET === 'build') {
       loaders: [
         {
           test: /\.css$/,
-          loaders: ExtractTextPlugin.extract('style', 'css'),
+          loader: ExtractTextPlugin.extract('style', 'css'),
           include: PATHS.app
         }
       ]
     },
     plugins: [
-      new Clean([build]),
-      new ExtractTextPlugin('styles.[chnkhash].css'),
+      new Clean([PATHS.build]),
+      new ExtractTextPlugin('styles.[chunkhash].css'),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
