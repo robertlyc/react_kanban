@@ -2,8 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin');
 var merge = require('webpack-merge');
-
 var pkg = require('./package.json');
+var Clean = require('clean-webpack-plugin');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -73,7 +73,13 @@ if (TARGET === 'build') {
         return v !== 'alt-utils';
       })
     },
+    output: {
+      path: PATHS.build,
+      filename: '[name].[chunkhash].js',
+      chunkFilename: '[chunkhash].js'
+    },
     plugins: [
+      new Clean([PATHS.build]),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
